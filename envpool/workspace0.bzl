@@ -376,6 +376,17 @@ def workspace():
         build_file = "//third_party/box2d:box2d.BUILD",
     )
 
+    maybe(
+        http_archive,
+        name = "gambatte",
+        sha256 = "fa6dfd4d1d4e7e3d1208c6f9611baa224024d4fb5a93e5d528389a7e6bab52cf",
+        strip_prefix = "gambatte-speedrun-r717",
+        urls = [
+            "https://github.com/pokemon-speedrunning/gambatte-speedrun/archive/refs/tags/r717.tar.gz",
+        ],
+        build_file = "//third_party/gambatte:gambatte.BUILD",
+    )
+
     # Atari/VizDoom pretrained weight for testing pipeline
 
     maybe(
