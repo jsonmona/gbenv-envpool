@@ -4,12 +4,30 @@ load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
 package(default_visibility = ["//visibility:public"])
 
 cc_library(
-    name = "gbenv_h",
-    hdrs = ["gbenv.h"],
+    name = "gbenv_core",
+    hdrs = [
+        "gbenv.h",
+        "action_space.h",
+    ],
+    srcs = [
+        "action_space.cpp",
+    ],
     deps = [
         "//envpool/core:async_envpool",
         "@gambatte//:gambatte"
     ],
+)
+
+cc_test(
+    name = "gbenv_core_test",
+    srcs = [
+        "action_space_test.cpp",
+    ],
+    deps = [
+        ":gbenv_core",
+        "@com_google_googletest//:gtest_main",
+    ],
+    size = "small",
 )
 
 pybind_extension(
@@ -18,7 +36,7 @@ pybind_extension(
         "gbenv.cc",
     ],
     deps = [
-        ":gbenv_h",
+        ":gbenv_core",
         "//envpool/core:py_envpool",
     ],
 )
